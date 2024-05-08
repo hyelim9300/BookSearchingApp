@@ -13,6 +13,8 @@
 		2EBF32842BEB49F000E00FAC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2EBF32832BEB49F000E00FAC /* Base */; };
 		2EBF32862BEB49F100E00FAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EBF32852BEB49F100E00FAC /* Assets.xcassets */; };
 		2EBF32892BEB49F100E00FAC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2EBF32882BEB49F100E00FAC /* Base */; };
+		2EBF32942BEB4C7D00E00FAC /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF32932BEB4C7D00E00FAC /* CartViewController.swift */; };
+		2EBF32962BEB4C9D00E00FAC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF32952BEB4C9D00E00FAC /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		2EBF32852BEB49F100E00FAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EBF32882BEB49F100E00FAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EBF328A2BEB49F100E00FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EBF32932BEB4C7D00E00FAC /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		2EBF32952BEB4C9D00E00FAC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +63,22 @@
 				2EBF327C2BEB49F000E00FAC /* AppDelegate.swift */,
 				2EBF327E2BEB49F000E00FAC /* SceneDelegate.swift */,
 				2EBF32802BEB49F000E00FAC /* ViewController.swift */,
+				2EBF32922BEB4C6B00E00FAC /* New Group */,
 				2EBF32822BEB49F000E00FAC /* Main.storyboard */,
 				2EBF32852BEB49F100E00FAC /* Assets.xcassets */,
 				2EBF32872BEB49F100E00FAC /* LaunchScreen.storyboard */,
 				2EBF328A2BEB49F100E00FAC /* Info.plist */,
 			);
 			path = BookApp;
+			sourceTree = "<group>";
+		};
+		2EBF32922BEB4C6B00E00FAC /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				2EBF32952BEB4C9D00E00FAC /* SearchViewController.swift */,
+				2EBF32932BEB4C7D00E00FAC /* CartViewController.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +152,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EBF32962BEB4C9D00E00FAC /* SearchViewController.swift in Sources */,
 				2EBF32812BEB49F000E00FAC /* ViewController.swift in Sources */,
 				2EBF327D2BEB49F000E00FAC /* AppDelegate.swift in Sources */,
+				2EBF32942BEB4C7D00E00FAC /* CartViewController.swift in Sources */,
 				2EBF327F2BEB49F000E00FAC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
