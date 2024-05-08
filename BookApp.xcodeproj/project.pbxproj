@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E69EC0B2BEB692300ED7CAB /* RemoteProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E69EC0A2BEB692300ED7CAB /* RemoteProduct.swift */; };
+		2E69EC0D2BEB921400ED7CAB /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E69EC0C2BEB921400ED7CAB /* CartTableViewCell.swift */; };
 		2EBF327D2BEB49F000E00FAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF327C2BEB49F000E00FAC /* AppDelegate.swift */; };
 		2EBF327F2BEB49F000E00FAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF327E2BEB49F000E00FAC /* SceneDelegate.swift */; };
 		2EBF32812BEB49F000E00FAC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF32802BEB49F000E00FAC /* ViewController.swift */; };
@@ -15,9 +17,12 @@
 		2EBF32892BEB49F100E00FAC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2EBF32882BEB49F100E00FAC /* Base */; };
 		2EBF32942BEB4C7D00E00FAC /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF32932BEB4C7D00E00FAC /* CartViewController.swift */; };
 		2EBF32962BEB4C9D00E00FAC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF32952BEB4C9D00E00FAC /* SearchViewController.swift */; };
+		2EBF32992BEB5FCD00E00FAC /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF32982BEB5FCD00E00FAC /* SearchTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E69EC0A2BEB692300ED7CAB /* RemoteProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteProduct.swift; sourceTree = "<group>"; };
+		2E69EC0C2BEB921400ED7CAB /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		2EBF32792BEB49F000E00FAC /* BookApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EBF327C2BEB49F000E00FAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EBF327E2BEB49F000E00FAC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +33,7 @@
 		2EBF328A2BEB49F100E00FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EBF32932BEB4C7D00E00FAC /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		2EBF32952BEB4C9D00E00FAC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		2EBF32982BEB5FCD00E00FAC /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E69EC092BEB690900ED7CAB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2E69EC0A2BEB692300ED7CAB /* RemoteProduct.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2EBF32702BEB49F000E00FAC = {
 			isa = PBXGroup;
 			children = (
@@ -63,7 +77,8 @@
 				2EBF327C2BEB49F000E00FAC /* AppDelegate.swift */,
 				2EBF327E2BEB49F000E00FAC /* SceneDelegate.swift */,
 				2EBF32802BEB49F000E00FAC /* ViewController.swift */,
-				2EBF32922BEB4C6B00E00FAC /* New Group */,
+				2E69EC092BEB690900ED7CAB /* Model */,
+				2EBF32922BEB4C6B00E00FAC /* ViewControllers */,
 				2EBF32822BEB49F000E00FAC /* Main.storyboard */,
 				2EBF32852BEB49F100E00FAC /* Assets.xcassets */,
 				2EBF32872BEB49F100E00FAC /* LaunchScreen.storyboard */,
@@ -72,13 +87,23 @@
 			path = BookApp;
 			sourceTree = "<group>";
 		};
-		2EBF32922BEB4C6B00E00FAC /* New Group */ = {
+		2EBF32922BEB4C6B00E00FAC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				2EBF32952BEB4C9D00E00FAC /* SearchViewController.swift */,
 				2EBF32932BEB4C7D00E00FAC /* CartViewController.swift */,
+				2EBF32972BEB5FAC00E00FAC /* Cells */,
 			);
-			path = "New Group";
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2EBF32972BEB5FAC00E00FAC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2EBF32982BEB5FCD00E00FAC /* SearchTableViewCell.swift */,
+				2E69EC0C2BEB921400ED7CAB /* CartTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,8 +180,11 @@
 				2EBF32962BEB4C9D00E00FAC /* SearchViewController.swift in Sources */,
 				2EBF32812BEB49F000E00FAC /* ViewController.swift in Sources */,
 				2EBF327D2BEB49F000E00FAC /* AppDelegate.swift in Sources */,
+				2EBF32992BEB5FCD00E00FAC /* SearchTableViewCell.swift in Sources */,
 				2EBF32942BEB4C7D00E00FAC /* CartViewController.swift in Sources */,
+				2E69EC0B2BEB692300ED7CAB /* RemoteProduct.swift in Sources */,
 				2EBF327F2BEB49F000E00FAC /* SceneDelegate.swift in Sources */,
+				2E69EC0D2BEB921400ED7CAB /* CartTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
