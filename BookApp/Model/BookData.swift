@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct RemoteProduct: Decodable {
-    let id: Int
+struct BookData: Codable {
     let title: String
-    let description: String
-    let price: Double
-    let thumbnail: URL
+    let price: Int
+    let thumbnail: String
+    let authors: [String]
+    let contents: String
 }

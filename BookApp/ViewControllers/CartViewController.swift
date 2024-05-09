@@ -20,7 +20,7 @@ class CartViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        view.addSubview(tableView) // 뷰 추가 바로 여기서 실행
+        view.addSubview(tableView)
         configure()
         setupConstraints()
     }
@@ -49,7 +49,6 @@ class CartViewController: UIViewController, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.identifier, for: indexPath) as? CartTableViewCell else {
             return UITableViewCell()
         }
-        // 셀 구성
         return cell
     }
     
