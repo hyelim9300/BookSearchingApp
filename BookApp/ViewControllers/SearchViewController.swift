@@ -15,8 +15,6 @@ class SearchViewController: UIViewController {
     }
     
     private var bookList: [BookData] = []
-    var pageCnt = 1
-    var isEnd = false
     
     private let tableView: UITableView = {
         let tableView = UITableView()

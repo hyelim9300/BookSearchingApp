@@ -9,19 +9,36 @@ import Foundation
 
 class CartManager {
     static let shared = CartManager()
-    
+    private let userDefaultsKey = "cartItems"
     private var cartItems: [BookData] = []
     
-    private init() {}
+    private init() {
+        loadCartItems()
+    }
     
     func addToCart(book: BookData) {
         cartItems.append(book)
+        saveCartItems()
+    }
+
+    func getCartItems() -> [BookData] {
+        return cartItems
     }
     
-    func getCartItems() -> [BookData] {
-        return cartItems.sorted(by: { $0.title > $1.title })
+    private func saveCartItems() {
+        if let data = try? JSONEncoder().encode(cartItems) {
+            UserDefaults.standard.set(data, forKey: userDefaultsKey)
+        }
+    }
+    
+    private func loadCartItems() {
+        if let data = UserDefaults.standard.data(forKey: userDefaultsKey),
+           let books = try? JSONDecoder().decode([BookData].self, from: data) {
+            cartItems = books
+        }
     }
 }
+
 
 class RecentBooksManager {
     static let shared = RecentBooksManager()
@@ -48,10 +65,10 @@ class RecentBooksManager {
         if recentBooks.count > maxCount {
             recentBooks.removeLast()
         }
-        save()
+        resentBookSave()
     }
 
-    private func save() {
+    private func resentBookSave() {
         if let data = try? JSONEncoder().encode(recentBooks) {
             UserDefaults.standard.set(data, forKey: userDefaultsKey)
         }

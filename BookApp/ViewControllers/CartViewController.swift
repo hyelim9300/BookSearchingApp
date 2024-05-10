@@ -43,14 +43,14 @@ class CartViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CartManager.shared.getCartItems().count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.identifier, for: indexPath) as? CartTableViewCell else {
             return UITableViewCell()
         }
         let cartItems = CartManager.shared.getCartItems()
         let book = cartItems[indexPath.row]
-        cell.configure(with: book)
+        cell.configure(with: book)  // CartTableViewCell에 적절히 구현된 configure 메소드 필요
         return cell
     }
 }

@@ -136,7 +136,7 @@ class DetailViewController: UIViewController {
         }
         CartManager.shared.addToCart(book: selectedBook)
         
-        NotificationCenter.default.post(name: Notification.Name("추가되었습니다."), object: nil, userInfo: ["book": selectedBook])
+        NotificationCenter.default.post(name: Notification.Name("DidAddToCart"), object: nil, userInfo: ["book": selectedBook])
         dismiss(animated: true, completion: nil)
     }
     
