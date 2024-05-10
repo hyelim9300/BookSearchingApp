@@ -25,16 +25,14 @@ class SearchViewController: UIViewController {
         return tableView
     }()
     
-    var dataSource: [String] = []
-    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .blue
+        collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.id)
+        collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         return collectionView
@@ -64,7 +62,6 @@ class SearchViewController: UIViewController {
         addSubView()
         autoLayout()
         setSearchBar()
-        setupDataSource()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -84,7 +81,7 @@ class SearchViewController: UIViewController {
         view.addSubview(collectionView)
         view.addSubview(tableView)
     }
-
+    
     private func autoLayout() {
         NSLayoutConstraint.activate([
             presentLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -92,10 +89,10 @@ class SearchViewController: UIViewController {
             presentLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
             collectionView.topAnchor.constraint(equalTo: presentLabel.bottomAnchor, constant: 20),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 100),
-
+            
             resultLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 20),
             resultLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             resultLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -107,15 +104,6 @@ class SearchViewController: UIViewController {
         ])
         
         view.sendSubviewToBack(tableView)
-
-    }
-
-
-    
-    private func setupDataSource() {
-        for i in 0...10 {
-            dataSource += ["\(i)"]
-        }
     }
     
     func callRequest(_ query: String) {
@@ -172,20 +160,26 @@ class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item < bookList.count {
+            let selectedBook = bookList[indexPath.item]
+            let detailVC = DetailViewController()
+            detailVC.bookData = selectedBook
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return RecentBooksManager.shared.getRecentBooks().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.id, for: indexPath) as? SearchCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.identifier, for: indexPath) as? SearchCollectionViewCell else {
             return UICollectionViewCell()
         }
+        let book = RecentBooksManager.shared.getRecentBooks()[indexPath.row]
+        cell.configure(with: book)
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: 100)
     }
 }
 
@@ -252,15 +246,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         if !bookList.isEmpty {
             let selectedBook = bookList[indexPath.row]
+            RecentBooksManager.shared.addBook(book: selectedBook)
             let detailVC = DetailViewController()
             detailVC.bookData = selectedBook
             present(detailVC, animated: true, completion: nil)
         }
     }
-}
-
-func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 100
 }
 
 #Preview {

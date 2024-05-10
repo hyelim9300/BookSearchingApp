@@ -7,25 +7,10 @@
 
 import UIKit
 
-class SearchTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SearchTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     static let identifier = "SearchTableViewCell"
-    
-    var dataSource: [String] = []
-    
-    lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .blue
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.id)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        return collectionView
-    }()
     
     class ImageCache {
         static let shared = ImageCache()
@@ -64,9 +49,12 @@ class SearchTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         }
         
         bookTitle.text = book.title
-        bookAuthor.text = book.authors[0]
         bookPrice.text = "\(book.price)원"
-        
+        if !book.authors.isEmpty {
+            bookAuthor.text = book.authors[0]
+        } else {
+            bookAuthor.text = "저자 미상"
+        }
         
         if let cachedImage = ImageCache.shared.getImage(forKey: book.thumbnail) {
             bookImg.image = cachedImage
@@ -151,22 +139,5 @@ class SearchTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-    }
-    
-    // UICollectionViewDelegate 및 UICollectionViewDataSource 메서드 구현
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.id, for: indexPath) as? SearchCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        // configure your cell
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
     }
 }

@@ -8,43 +8,41 @@
 import UIKit
 
 class SearchCollectionViewCell: UICollectionViewCell {
+    static let identifier = "SearchCollectionViewCell"
     
-    static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
-    
-    var model: String? { didSet { bind() } }
-    
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        
-        return label
+    let thumbnailImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.addSubview(thumbnailImageView)
         
-        addSubviews()
-        configure()
+        NSLayoutConstraint.activate([
+            thumbnailImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            thumbnailImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            thumbnailImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            thumbnailImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
     
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
-    private func addSubviews() {
-        addSubview(titleLabel)
-    }
-    
-    private func configure() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-            ])
-        backgroundColor = .placeholderText
-    }
-    private func bind() {
-        titleLabel.text = model
+    func configure(with book: BookData) {
+        // 이미지뷰에 책의 썸네일 이미지 설정
+        if let url = URL(string: book.thumbnail) {
+            URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+                guard let self = self, let data = data else { return }
+                DispatchQueue.main.async {
+                    self.thumbnailImageView.image = UIImage(data: data)
+                }
+            }.resume()
+        }
     }
 }

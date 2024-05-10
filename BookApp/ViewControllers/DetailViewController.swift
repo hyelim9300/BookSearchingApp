@@ -131,9 +131,13 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func addToCart() {
-        // "담기" 버튼 액션
-        // 선택된 책을 장바구니에 추가하는 로직을 구현
-        // 예: CartViewController에 선택된 책 데이터를 전달하고 모달을 닫음
+        guard let selectedBook = bookData else {
+            return
+        }
+        CartManager.shared.addToCart(book: selectedBook)
+        
+        NotificationCenter.default.post(name: Notification.Name("추가되었습니다."), object: nil, userInfo: ["book": selectedBook])
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func closeModal() {
